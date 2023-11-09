@@ -1,6 +1,23 @@
 \chapter{Introduction}
 \label{ch:intro}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu egestas mauris. Quisque nisl elit, varius in erat eu, dictum commodo lorem. Sed commodo libero et sem laoreet consectetur. Fusce ligula arcu, vestibulum et sodales vel, venenatis at velit \cite{dahl1972structured}. Aliquam erat volutpat. Proin condimentum accumsan velit id hendrerit. Cras egestas arcu quis felis placerat, ut sodales velit malesuada. Maecenas et turpis eu turpis placerat euismod.\footnote{Maecenas a urna viverra, scelerisque nibh ut, malesuada ex.}
+Let us consider a set of objects denoted by $X$ and the task of predicting some unknown properties of the elements of $X$. These properties can be characterized by some label set $L$. For example, $X$ can be the set of all images, and the property of interest can be whether a single image contains a dog or not. In this case, we can let $L:=\{0, 1\}$, where $0$ means the absence of a dog, and $1$ means that the image does contain a dog. Our goal is to find an algorithm that can correctly label any image. This can be achieved by finding a function $f:X \to L$ that maps all image to either $0$ or $1$, depending on whether the image contains a dog or not.
 
-Aliquam suscipit dignissim tempor. Praesent tortor libero, feugiat et tellus porttitor, malesuada eleifend felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus \cite{cormen2009algorithms,krasner1988mvc}. Nullam eleifend imperdiet lorem, sit amet imperdiet metus pellentesque vitae. Donec nec ligula urna. Aliquam bibendum tempor diam, sed lacinia eros dapibus id. Donec sed vehicula turpis. Aliquam hendrerit sed nulla vitae convallis. Etiam libero quam, pharetra ac est nec, sodales placerat augue. \citeauthor{dijkstra1979goto} praesent eu consequat purus \cite{dijkstra1979goto}. 
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/doge.jpg}
+    \caption{An image containing a dog}
+    \label{fig:doge}
+\end{figure}
+
+We can measure the "goodness" of a function by assuming that our data comes from a distribution $D$ over $X \times L$. Then the error of of $f$ w.r.t $D$ is the probability that $f(x)=y$, where $(x,y)$ is sampled from $D$.
+
+\begin{definition}
+    Let $X$ be a nonempty set, $L$ a finite set of labels and $D$ a joint probability distribution over $X \times L$. Then the true error of a the function $f:X \to L$ is
+    \[
+        L_{D}(f) :=\underset{(x,y)\sim D}{\mathbb{P}}\left[f(x)\neq y\right]
+    .\] 
+\end{definition}
+
+The problem is that we usually don't have access to the distribution $D$, but only to a finite list of training data $S=((x_1,y_1), (x_2,y_2), \ldots, (x_m, y_m))$, sampled from $D$.
+
